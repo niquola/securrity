@@ -1,5 +1,19 @@
+require 'bcrypt'
 module Securrity
   class UserRepository < BaseRepository
+
+    def create(attrs)
+      password = attrs.delete(:password)
+      if password
+        attrs[:encrypted_password] =  encrypted_password(password)
+      end
+      super(attrs)
+    end
+
+    def encrypted_password(password)
+      salt = BCrypt::Engine.generate_salt
+      BCrypt::Engine.hash_secret(password, salt)
+    end
 
     def assign_role(user_id, role_id)
       get_relation(:user_roles)

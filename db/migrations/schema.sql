@@ -1,15 +1,15 @@
 --db:securrity
 --db:fhirbase
 --{{{
-drop table securrity_schema_migrations;
+    drop table securrity_schema_migrations;
     drop schema securrity cascade;
     create schema securrity;
     create extension IF NOT EXISTS "uuid-ossp";
 
     create table securrity.users (
       user_id uuid primary key default uuid_generate_v4(),
-      name varchar,
-      password varchar,
+      name varchar unique not null,
+      encrypted_password varchar,
       status varchar
     );
 
@@ -21,7 +21,7 @@ drop table securrity_schema_migrations;
 
     create table securrity.operations (
       operation_id uuid primary key default uuid_generate_v4(),
-      code varchar,
+      code varchar unique not null,
       display_name varchar,
       description text,
       locked boolean
@@ -29,7 +29,7 @@ drop table securrity_schema_migrations;
 
     create table securrity.objects (
       object_id uuid primary key default uuid_generate_v4(),
-      code varchar,
+      code varchar unique not null,
       display_name varchar,
       type varchar,
       definition text,
@@ -40,7 +40,7 @@ drop table securrity_schema_migrations;
 
     create table securrity.roles (
       role_id uuid primary key default uuid_generate_v4(),
-      display_name varchar,
+      display_name varchar unique not null,
       description text
     );
 
@@ -56,7 +56,7 @@ drop table securrity_schema_migrations;
 
     create table securrity.permissions (
       permission_id uuid primary key default uuid_generate_v4(),
-      code varchar,
+      code varchar unique not null,
       display_name varchar,
       description text,
       object_id uuid references securrity.objects(object_id),

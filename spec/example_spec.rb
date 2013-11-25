@@ -17,6 +17,8 @@ describe Securrity do
     user = sys.create_user(name: 'nicola', password: '123456')
     sys.users.should include(user)
 
+    p sys.users
+
     list_perm = sys.create_permission(:list_patients, 'Read Patient List')
     sys.permissions.should include(list_perm)
 

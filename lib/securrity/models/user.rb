@@ -1,7 +1,8 @@
 module Securrity
   class User < BaseModel
     attribute :user_id, String
-    attribute :password, String
+    # attribute :password, String
+    # attribute :encrypted_password, String
     attribute :name, String
     attribute :status, String
 
