@@ -1,8 +1,8 @@
 --db:securrity
 --db:fhirbase
 --{{{
-    drop table securrity_schema_migrations;
-    drop schema securrity cascade;
+    -- drop table securrity_schema_migrations;
+    drop schema IF EXISTS securrity cascade;
     create schema securrity;
     create extension IF NOT EXISTS "uuid-ossp";
 

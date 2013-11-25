@@ -1,5 +1,6 @@
 require 'securrity'
 require 'sequel'
+require 'yaml'
 
 Sequel.extension :pg_array_ops, :pg_row_ops
 cfg = YAML.load(File.read(File.dirname(__FILE__) + '/connection.yml'))
